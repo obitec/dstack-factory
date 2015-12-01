@@ -1,0 +1,7 @@
+wheel-factory:
+  image: kmaginary/factory
+  volumes:
+    - /srv/build/wheelhouse:/wheelhouse
+    - /srv/build/requirements.txt:/app/requirements.txt
+  command: bash -c "while read p; do /env/bin/pip wheel $$p; done < requirements.txt"
+

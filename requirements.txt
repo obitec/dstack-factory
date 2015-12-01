@@ -1,0 +1,9 @@
+psycopg2
+redis
+celery
+gunicorn
+django>=1.9rc2
+django-reversion
+django-import-export
+django-guardian
+djangorestframework
