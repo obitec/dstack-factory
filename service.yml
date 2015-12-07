@@ -2,6 +2,12 @@ wheel-factory:
   image: kmaginary/factory
   volumes:
     - /srv/build/wheelhouse:/wheelhouse
-    - /srv/build/requirements.txt:/app/requirements.txt
-  command: bash -c "while read p; do /env/bin/pip wheel $$p; done < requirements.txt"
+    - /srv/build/build-requirements.txt:/app/requirements.txt
+  environment:
+    - HDF5_DIR=/usr/lib/x86_64-linux-gnu/hdf5/serial/
+    - WHEELHOUSE=/wheelhouse
+    - PIP_WHEEL_DIR=/wheelhouse
+    - PIP_FIND_LINKS=/wheelhouse
+    - VIRTUAL_ENV=/env  
+  command: bash -c "pip install -U pip wheel cython numpy && while read p; do /env/bin/pip wheel $$p; done < requirements.txt && pip freeze > /wheelhouse/installed.txt"
 
