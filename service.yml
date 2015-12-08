@@ -9,5 +9,5 @@ wheel-factory:
     - PIP_WHEEL_DIR=/wheelhouse
     - PIP_FIND_LINKS=/wheelhouse
     - VIRTUAL_ENV=/env  
-  command: bash -c "pip install -U pip wheel cython numpy && while read p; do /env/bin/pip wheel $$p; done < requirements.txt && pip freeze > /wheelhouse/installed.txt"
+#  command: bash -c "pip install -U pip wheel cython numpy && while read p; do /env/bin/pip wheel $$p; done < requirements.txt && pip freeze > /wheelhouse/installed.txt"
 

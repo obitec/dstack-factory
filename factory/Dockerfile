@@ -3,9 +3,10 @@ FROM python:3.5-slim
 MAINTAINER JR Minnaar <jr.minnaar@gmail.com> 
 
 RUN apt-get -q update && apt-get install -y \
-  build-essential curl git mercurial vim tree htop \
+  build-essential pkg-config curl git mercurial vim tree htop \
   libpng-dev libjpeg-dev libpng12-dev \
-  freetype* \
+  libfreetype6-dev \
+  libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0 \
   libatlas-dev libblas-dev liblapack-dev libfftw3-dev libffi-dev \
   libssl-dev \
   libxml2-dev libxslt1-dev \
@@ -24,6 +25,6 @@ ENV PATH=/env/bin:$PATH
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-CMD docker-entrypoint.sh
+CMD /docker-entrypoint.sh
 
 #RUN pip install -U pip wheel cython
