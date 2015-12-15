@@ -3,11 +3,12 @@ MAINTAINER JR Minnaar <jr.minnaar@gmail.com>
 
 RUN apt-get update && apt-get install -y libatlas3-base libblas3 libc6 libgfortran3 liblapack3 libgcc1
 
+RUN pip install --upgrade pip virtualenv wheel && virtualenv /env && mkdir -p /app
+
 # Non privaged user
 RUN adduser --disabled-password --gecos '' --no-create-home webapp && \
     chown -R webapp:webapp /app
 
-RUN pip install --upgrade pip virtualenv wheel && virtualenv /env && mkdir -p /app
 WORKDIR /app
 ENV HOME /app
 ENV PATH /env/bin:$PATH

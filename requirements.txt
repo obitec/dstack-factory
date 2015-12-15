@@ -1,10 +1,11 @@
 pandas
+ipython
 gunicorn
 celery
 redis
 psycopg2
 pillow
-django==1.8
+django
 djangorestframework
 django-import-export
 django-reversion
