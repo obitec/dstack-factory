@@ -11,7 +11,7 @@ gunicorn
 celery
 redis
 psycopg2
-pillow
+Pillow
 jinja2
 weasyprint
 ipython
