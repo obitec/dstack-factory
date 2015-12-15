@@ -19,5 +19,4 @@ COPY requirements.txt $HOME/
 RUN pip install --pre --no-index -f /wheelhouse -r requirements.txt && rm -rf /wheelhouse
 
 #USER webapp
-
 # COPY ./bin/docker-entrypoint.sh /home/webapp/docker-entrypoint.sh
