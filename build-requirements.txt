@@ -1,4 +1,5 @@
 # Data science stack
+numpy==1.10.4
 scipy==0.17.0
 tables==3.2.2
 statsmodels==0.6.1
