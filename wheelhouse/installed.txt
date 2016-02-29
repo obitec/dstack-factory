@@ -1,4 +1,0 @@
--f /wheelhouse
-Cython==0.23.4
-numpy==1.10.1
-wheel==0.26.0
