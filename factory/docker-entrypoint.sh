@@ -12,7 +12,8 @@ then
     ln -s /env/bin/f2py3.5 /env/bin/f2py
 fi
 
-while read p; do pip wheel $p; done < requirements.txt;
+#while read p; do pip wheel $p; done < requirements.txt;
+pip wheel $(cat requirements.txt | grep -v ^# | xargs)
 
 rsync -av /wheelhouse/ /archive
 
