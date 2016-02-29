@@ -1,14 +1,20 @@
-wheel-factory:
-  image: obitec/wheel-factory
-  volumes:
-    - /srv/build/wheelhouse:/wheelhouse
-    - /srv/build/archive:/archive
-    - /srv/build/build-requirements.txt:/app/requirements.txt
-  environment:
-    - HDF5_DIR=/usr/lib/x86_64-linux-gnu/hdf5/serial/
-    - WHEELHOUSE=/wheelhouse
-    - PIP_WHEEL_DIR=/wheelhouse
-    - PIP_FIND_LINKS=/wheelhouse
-    - VIRTUAL_ENV=/env  
-#  command: bash -c "pip install -U pip wheel cython numpy && while read p; do /env/bin/pip wheel $$p; done < requirements.txt && pip freeze > /wheelhouse/installed.txt"
+version: '2'
 
+services:
+  wheel-factory:
+    image: obitec/wheel-factory
+    build:
+      context: ./factory
+      dockerfile: Dockerfile
+    volumes:
+      - /srv/build/wheelhouse:/wheelhouse
+      - /srv/build/archive:/archive
+      - /srv/build/build-requirements.txt:/app/requirements.txt
+    environment:
+      - HDF5_DIR=/usr/lib/x86_64-linux-gnu/hdf5/serial/
+      - WHEELHOUSE=/wheelhouse
+      - PIP_WHEEL_DIR=/wheelhouse
+      - PIP_FIND_LINKS=/archive
+      - VIRTUAL_ENV=/env  
+      - CEXT=True
+  #  command: bash -c "pip install -U pip wheel cython numpy && while read p; do /env/bin/pip wheel $$p; done < requirements.txt && pip freeze > /wheelhouse/installed.txt"  

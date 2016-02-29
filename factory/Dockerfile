@@ -13,7 +13,8 @@ RUN apt-get -q update && apt-get install -y \
   libpq-dev libmysqlclient-dev libhdf5-serial-dev \
   libcurl4-openssl-dev \
   zlib1g-dev \
-  gfortran
+  gfortran \
+  rsync
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.5 get-pip.py
 RUN pip install --upgrade pip virtualenv
