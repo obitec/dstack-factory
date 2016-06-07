@@ -17,4 +17,10 @@ ENV PATH /env/bin:$PATH
 
 COPY wheelhouse /wheelhouse
 COPY requirements.txt $HOME/
-RUN pip install --pre --no-index -f /wheelhouse -r requirements.txt && rm -rf /wheelhouse
+
+RUN pip install --pre --no-index --no-cache-dir -f /wheelhouse -r requirements.txt && rm -rf /wheelhouse
+
+#RUN usermod -u 1000 webapp
+#USER webapp
+#COPY ./bin/docker-entrypoint.sh /home/webapp/docker-entrypoint.sh
+
