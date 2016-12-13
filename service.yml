@@ -2,7 +2,7 @@ version: '2'
 
 services:
   wheel-factory:
-    image: obitec/wheel-factory
+    image: obitec/wheel-factory:latest
     build:
       context: ./factory
       dockerfile: Dockerfile
@@ -15,6 +15,6 @@ services:
       - WHEELHOUSE=/wheelhouse
       - PIP_WHEEL_DIR=/wheelhouse
       - PIP_FIND_LINKS=/archive
-      - VIRTUAL_ENV=/env  
+      - VIRTUAL_ENV=/env
       - CEXT=True
-  #  command: bash -c "pip install -U pip wheel cython numpy && while read p; do /env/bin/pip wheel $$p; done < requirements.txt && pip freeze > /wheelhouse/installed.txt"  
+

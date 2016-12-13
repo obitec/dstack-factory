@@ -9,7 +9,7 @@ then
     pip install cython
     pip wheel numpy
     pip install numpy
-    ln -s /env/bin/f2py3.5 /env/bin/f2py
+#    ln -s /env/bin/f2py3.5 /env/bin/f2py
 fi
 
 #while read p; do pip wheel $p; done < requirements.txt;
