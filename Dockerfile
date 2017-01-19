@@ -2,8 +2,19 @@ FROM python:3.5-slim
 MAINTAINER JR Minnaar <jr.minnaar@gmail.com>
 
 RUN apt-get update && apt-get install -y \
-    libatlas3-base libblas3 libc6 libgfortran3 liblapack3 libgcc1 libjpeg62 libpq5 \
-    libxslt1.1 libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0
+    libatlas3-base \
+	libblas3 \
+	libc6 \
+	libgfortran3 \
+	liblapack3 \
+	libgcc1 \
+	libjpeg62 \
+	libpq5 \
+	libmysqlclient18 \
+    libxslt1.1 \
+	libcairo2 \
+	libpango1.0-0 \
+	libgdk-pixbuf2.0-0
 
 RUN pip install --upgrade pip virtualenv wheel && virtualenv /env && mkdir -p /app
 
@@ -20,6 +31,7 @@ COPY requirements.txt $HOME/
 
 RUN pip install --pre --no-index --no-cache-dir -f /wheelhouse -r requirements.txt && rm -rf /wheelhouse
 
+#RUN apt-get install -y libmysqlclient18
 #RUN usermod -u 1000 webapp
 #USER webapp
 #COPY ./bin/docker-entrypoint.sh /home/webapp/docker-entrypoint.sh
