@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --upgrade pip virtualenv wheel && virtualenv /env && mkdir -p /app
 
-# Non privaged user
+# Non privilaged user
 RUN adduser --disabled-password --gecos '' --no-create-home webapp && \
     chown -R webapp:webapp /app
 
