@@ -1,6 +1,8 @@
 FROM python:3.5-slim
 MAINTAINER JR Minnaar <jr.minnaar+dstack@gmail.com>
 
+ARG UID=4801
+
 RUN apt-get update && apt-get install -y \
     libatlas3-base \
     libblas3 \
@@ -19,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip virtualenv wheel && \
     virtualenv /env && \
     mkdir -p /app && \
-    adduser --disabled-password --gecos '' --no-create-home webapp && \
+    adduser --uid ${UID} --disabled-password --gecos '' --no-create-home webapp && \
     chown -R webapp:webapp /app
 
 WORKDIR /app

@@ -1,6 +1,6 @@
 FROM obitec/dstack-runtime:3.5
 
 ONBUILD ARG SRC_DIR
-ONBUILD ARG UID
+ONBUILD ARG UID=4801
 ONBUILD COPY ${SRC_DIR} /app
 ONBUILD RUN usermod -u ${UID} webapp && chown -R webapp:webapp /app
