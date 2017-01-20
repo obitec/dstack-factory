@@ -32,7 +32,3 @@ ONBUILD COPY wheelhouse /wheelhouse
 ONBUILD COPY requirements.txt /app/requirements.txt
 #ONBUILD COPY ${REQUIRE_FILE} /app/requirements.txt
 ONBUILD RUN pip install --pre --no-index --no-cache-dir -f /wheelhouse -r requirements.txt && rm -rf /wheelhouse
-
-#ONBUILD COPY setup.sh /app/
-#ONBUILD RUN chmod +x setup.sh && ./setup.sh
-# e.g. put "usermod -u 4801 webapp" in setup.sh
