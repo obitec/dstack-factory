@@ -1,3 +1,4 @@
-wheelhouse
-archive
+wheelhouse/
+archive/
 *.whl
+

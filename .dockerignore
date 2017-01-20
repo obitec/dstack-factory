@@ -1,6 +1,11 @@
-archive
-factory
-.git
+.git/
+archive/
+factory/
+recipes/
+runtime/
+
 .gitignore
-README.md
-services.yml
+Dockerfile
+docker-compose.yml
+LICENSE
+README.rst

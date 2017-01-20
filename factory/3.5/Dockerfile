@@ -1,6 +1,5 @@
-#FROM ubuntu:15.10
 FROM python:3.5-slim
-MAINTAINER JR Minnaar <jr.minnaar@gmail.com>
+MAINTAINER JR Minnaar <jr.minnaar+dstack@gmail.com>
 
 RUN apt-get -q update && apt-get install -y \
   build-essential \
@@ -35,16 +34,12 @@ RUN apt-get -q update && apt-get install -y \
   zlib1g-dev \
   gfortran
 
-RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3.5 get-pip.py
-RUN pip install --upgrade pip virtualenv
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3.5 get-pip.py && \
+    pip install --upgrade pip virtualenv wheel && \
+    virtualenv /env
 
 WORKDIR /app
-RUN virtualenv /env
-
 ENV PATH=/env/bin:$PATH
-
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-
 CMD /docker-entrypoint.sh
-
-#RUN pip install -U pip wheel cython
