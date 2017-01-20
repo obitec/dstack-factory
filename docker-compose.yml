@@ -7,7 +7,7 @@ services:
       context: ./factory/3.5/
       dockerfile: Dockerfile
       args:
-        - UID=${UID:-4801}
+        - UID=${UID}
     volumes:
       - /srv/build/wheelhouse:/wheelhouse
       - /srv/build/archive:/archive
