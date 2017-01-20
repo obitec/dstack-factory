@@ -13,8 +13,8 @@ To install ``dstack-factory``, clone this repo:
 
    git clone git@github.com:obitec/dstack-factory.git
    cd dstack-factory
-   docker-compose build wheel-factory
-   docker-compose run --rm -p project_name wheel-factory
+   docker-compose build factory
+   docker-compose run --rm -p project_name factory
 
 By default, the last command looks for a requirements.txt file and builds wheel files for each
 dependency (and their dependencies, all the way down) including ``cython`` and ``numpy``.
