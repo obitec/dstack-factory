@@ -6,8 +6,6 @@ services:
     build:
       context: ./factory/3.5/
       dockerfile: Dockerfile
-      args:
-        - UID=${UID}
     volumes:
       - /srv/build/wheelhouse:/wheelhouse
       - /srv/build/archive:/archive
@@ -27,3 +25,5 @@ services:
     build:
       context: ./runtime/3.5/
       dockerfile: Dockerfile
+      args:
+        - UID=${UID}
