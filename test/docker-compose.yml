@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+  webapp_from_source:
+    image: obitec/django:1.10.5-${INSTANCE:-production}
+    build:
+      context: .
+      args:
+        - UID=${UID:-4801}
+        - SRC_DIR=demo/
+    user: webapp
+    command: python manage.py runserver
+
+  webapp_from_wheel:
+    image: obitec/django:1.10.5-${INSTANCE:-production}
+    build:
+      context: .
+      args:
+        - WHEEL_FILE=dist/django-1.10.5-py3-any-none.whl
+    user: webapp
+    command: python manage.py runserver
