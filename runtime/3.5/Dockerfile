@@ -9,14 +9,14 @@ RUN apt-get update && apt-get install -y \
     libc6 \
     libcairo2 \
     libgcc1 \
-    libgdk-pixbuf2.0-0
+    libgdk-pixbuf2.0-0 \
     libgfortran3 \
     libjpeg62 \
     liblapack3 \
     libmysqlclient18 \
     libpango1.0-0 \
     libpq5 \
-    libxslt1.1 \
+    libxslt1.1
 
 RUN pip install --upgrade pip virtualenv wheel && \
     virtualenv /env && \

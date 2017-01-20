@@ -13,19 +13,17 @@ To install ``dstack-factory``, clone this repo:
 
    git clone git@github.com:obitec/dstack-factory.git
    cd dstack-factory
-   docker-compose build wheel-factory
-   docker-compose run --rm -p project_name wheel-factory
+   docker-compose build factory
+   docker-compose run --rm -p project_name factory
 
 By default, the last command looks for a requirements.txt file and builds wheel files for each
 dependency (and their dependencies, all the way down) including ``cython`` and ``numpy``.
 
 This behaviour can be controlled by environmental variables, or an .env file. The variables are:
 
-   * **CEXT**: Default = True. Installs cython and numpy if True.
-   * **BUILD_REQ**: Default = True. Installs dependencies from requirements.txt if true, otherwise use existing wheel
-      file to build wheels.
-   * **RECIPE**: Default = requirements. Set this value to project_name.version (e.g. superset.0.15.1) to use a specific
-      requirements file or wheel file.
+- **CEXT**: Default = True. Installs cython and numpy if True.
+- **BUILD_REQ**: Default = True. Installs dependencies from requirements.txt if true, otherwise use existing wheel file to build wheels.
+- **RECIPE**: Default = requirements. Set this value to project_name.version (e.g. superset.0.15.1) to use a specific requirements file or wheel file.
 
 After running this command, you should have all the wheel files required to run your application. The next step is to
 build a docker container with these dependencies pre-installed. If it is a public project and you want the container
