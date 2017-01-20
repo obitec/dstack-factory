@@ -14,16 +14,27 @@ To install ``dstack-factory``, clone this repo:
    git clone git@github.com:obitec/dstack-factory.git
    cd dstack-factory
    docker-compose build factory
-   docker-compose run --rm -p project_name factory
+   
+   # Optionally push to DockerHub:
+   docker push obitec/dstack-factory:3.5
+   
+   # Build or save the wheel package for django:
+   echo "django==1.10.5" > recipes/requirements.txt
+   docker-compose run --rm factory
 
 By default, the last command looks for a requirements.txt file and builds wheel files for each
-dependency (and their dependencies, all the way down) including ``cython`` and ``numpy``.
-
-This behaviour can be controlled by environmental variables, or an .env file. The variables are:
+dependency (and their dependencies, all the way down) including ``cython`` and ``numpy``. This default behaviour can be controlled by environmental variables, or a .env file (in the same directory as the docker-compose.yml file). The variables are:
 
 - **CEXT**: Default = True. Installs cython and numpy if True.
-- **BUILD_REQ**: Default = True. Installs dependencies from requirements.txt if true, otherwise use existing wheel file to build wheels.
-- **RECIPE**: Default = requirements. Set this value to project_name.version (e.g. superset.0.15.1) to use a specific requirements file or wheel file.
+- **BUILD_REQ**: Default = True. Installs dependencies from requirements.txt if true, otherwise use specified or existing wheel file(s) to build wheels.
+- **RECIPE**: Default = "requirements". Set this value to project_name.version (e.g. superset-0.15.1) to use a specific requirements file or wheel file.
+
+Using the environmental variables, a better way to build the container for running django looks like this:
+
+.. code-block:: bash
+
+   echo "django==1.10.5" > recipes/django-1.10.5.txt
+   export CEXT=False RECIPE=django-1.10.5 && docker-compose run --rm factory
 
 After running this command, you should have all the wheel files required to run your application. The next step is to
 build a docker container with these dependencies pre-installed. If it is a public project and you want the container
@@ -31,44 +42,30 @@ to also contain your application code, make sure your application is listed in r
 
 .. code-block:: bash
 
-   docker build -t obitec/superset:0.15.1 .
+   docker-compose build runtime
+   
+   # Optionally push to DockerHub:
+   docker push obitec/dstack-runtime:3.5
+   
+   echo "django==1.10.5" > requirements.txt
+   docker build -t obitec/django:1.10.5 .
 
-
-If this is a private application, and you want the final package to only be installed when running docker-compose up,
-you have two options: ``Dockerfile-source`` and ``Dockerfile-wheel``:
+Test the newly created image by running:
 
 .. code-block:: bash
 
-   docker build -f Dockerfile-source -t obitec/superset:0.15.1-source .
-   docker build -f Dockerfile-wheel -t obitec/superset:0.15.1-wheel .
+   docker run --rm obitec/django:1.10.5 django-admin
+   
+If this is a private application, and you want the final package to only be installed when running docker-compose up,
+you have two options: ``Dockerfile-source`` and ``Dockerfile-wheel``. ``Dockerfile-source`` adds ``ONBUILD`` instructions for copying your application code from the ``${SRC_DIR}`` directory to ``/app``. ``Dockerfile-wheel`` copies and installs ``${WHEEL_FILE}``.
 
-Dockerfile-source adds ``ONBUILD`` instructions for copying your application code from the ``${SRC_DIR}`` directory to ``/app``
-Dockerfile-wheel copies and installs ``${WHEEL_FILE}``.
+Using Dockerfile-source as example:
 
-*Replace "obitec", "superset" and "0.15.1" with your own DockerHub username/organisation, image name and image tag.*
+.. code-block:: bash
 
-With a docker image containing your code, you can then use it as in this example ``docker-compose.yml`` file:
+   docker build -f Dockerfile-source -t obitec/django:1.10.5-source .
+   docker run --rm --user=webapp -v $PWD/test:/app obitec/django:1.10.5-source django-admin startproject demo
+   cd test
+   docker-compose up -d webapp_from_source
+   docker exec -it test_webapp_from_source_1 python manage.py migrate
 
-.. code-block:: yaml
-
-   version: "2"
-
-   services:
-     webapp_from_wheel:
-       image: superset:0.15.1-wheel
-       build:
-         context: .
-         args:
-           - WHEEL_FILE=dist/superset.${VERSION}-py3-any-none.whl
-         user: webapp
-         command: superset runserver
-
-     webapp_from_source:
-       image: superset:0.15.1-source
-       build:
-         context: .
-         args:
-           - UID=${UID}
-           - SRC_DIR=src/
-         user: webapp
-         command: python manage.py runserver
