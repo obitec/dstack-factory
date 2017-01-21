@@ -85,3 +85,7 @@ Using Dockerfile-source as example:
    docker exec -it test_webapp_from_source_1 python manage.py migrate
 
 The benefit of having a docker image with all the dependecies (except the application itself) pre-installed is that you can use public infrastrucutre (like DockerHub) host this image. It also makes it easier to upgrade your production image if you only made changes to the code, and not the runtime (e.g. updating a dependency).
+
+Python Support
+--------------
+The default Python version for ``factory`` and ``runtime`` is Python 3.5. Initial (untested) support for Python 3.6 has also been added and can be selected using the ``PY_VERSION`` docker build argument.
