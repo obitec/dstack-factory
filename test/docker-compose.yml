@@ -16,6 +16,7 @@ services:
     build:
       context: .
       args:
-        - WHEEL_FILE=dist/django-1.10.5-py3-any-none.whl
+#        - WHEEL_PACKAGE=${WHEEL_PACKAGE}
+        - WHEEL_PACKAGE=dist/django-1.10.5-py3-any-none.whl
     user: webapp
     command: python manage.py runserver
