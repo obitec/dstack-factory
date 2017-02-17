@@ -1,4 +1,4 @@
-FROM obitec/dstack-runtime:3.5
+FROM obitec/dstack-runtime:PY_VERSION
 
 ONBUILD ARG WHEEL_PACKAGE
 ONBUILD COPY ${WHEEL_PACKAGE} /app/

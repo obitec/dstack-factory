@@ -3,3 +3,4 @@ wheelhouse/
 archive/
 *.whl
 test/demo/
+version.txt
