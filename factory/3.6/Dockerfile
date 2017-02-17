@@ -35,7 +35,7 @@ RUN apt-get -q update && apt-get install -y \
   gfortran
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3.5 get-pip.py && \
+    python3 get-pip.py && \
     pip install --upgrade pip virtualenv wheel && \
     virtualenv /env
 
