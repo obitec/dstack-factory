@@ -1,4 +1,5 @@
+recipes/*.txt
 wheelhouse/
 archive/
 *.whl
-
+test/demo/

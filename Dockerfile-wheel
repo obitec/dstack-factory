@@ -1,5 +1,5 @@
 FROM obitec/dstack-runtime:3.5
 
 ONBUILD ARG WHEEL_PACKAGE
-ONBUILD COPY ${WHEEL_PACKAGE} /app/package.whl
-ONBUILD RUN pip install package.whl
+ONBUILD COPY ${WHEEL_PACKAGE} /app/
+ONBUILD RUN pip install ${WHEEL_PACKAGE}
