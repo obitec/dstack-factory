@@ -1,0 +1,1 @@
+FROM obitec/dstack-runtime:PY_VERSION
