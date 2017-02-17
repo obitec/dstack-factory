@@ -79,6 +79,10 @@ def git(ctx, cmd='--help', **kwargs):
 
 @task
 def install(ctx, push=True, py_version=3.5, **kwargs):
+    # TODO: aws sync wheels to save time on first run?
+
+    git(ctx, cmd='clone https://github.com/obitec/dstack-factory /srv/build/')
+
     compose(ctx, 'build factory', path='.', **kwargs)
     compose(ctx, 'build runtime', path='.', **kwargs)
     if push:
