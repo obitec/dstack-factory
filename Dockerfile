@@ -1,1 +1,5 @@
-FROM obitec/dstack-runtime:3.5
+FROM obitec/dstack-runtime:3.6
+
+ONBUILD ARG WHEEL_PACKAGE
+ONBUILD COPY ${WHEEL_PACKAGE} /app/
+ONBUILD RUN pip install ${WHEEL_PACKAGE} && rm ${WHEEL_PACKAGE}

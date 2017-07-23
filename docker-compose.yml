@@ -2,9 +2,9 @@ version: '2.1'
 
 services:
   factory:
-    image: obitec/dstack-factory:${PY_VERSION:-3.5}
+    image: obitec/dstack-factory:${PY_VERSION:-3.6}
     build:
-      context: ./factory/${PY_VERSION:-3.5}/
+      context: ./factory/${PY_VERSION:-3.6}/
       dockerfile: Dockerfile
     volumes:
       - /srv/build/wheelhouse:/wheelhouse
@@ -21,9 +21,9 @@ services:
       - BUILD_REQ
 
   runtime:
-    image: obitec/dstack-runtime:${PY_VERSION:-3.5}
+    image: obitec/dstack-runtime:${PY_VERSION:-3.6}
     build:
-      context: ./runtime/${PY_VERSION:-3.5}/
+      context: ./runtime/${PY_VERSION:-3.6}/
       dockerfile: Dockerfile
       args:
         - UID=${UID:-4801}
