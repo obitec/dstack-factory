@@ -1,5 +1,5 @@
 # Example primary package
-superset==0.15.1
+superset==0.23.0
 
 # Example GitHub dependency
 # git+https://github.com/jr-minnaar/superset
