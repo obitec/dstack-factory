@@ -1,2 +1,2 @@
 # Example
-superset==0.15.1
+superset==0.23.0
